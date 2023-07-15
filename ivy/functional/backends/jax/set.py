@@ -104,3 +104,10 @@ def unique_values(x: JaxArray, /, *, out: Optional[JaxArray] = None) -> JaxArray
     else:
         unique = jnp.unique(x.flatten()).astype(x.dtype)
     return unique
+
+def difference(x1: JaxArray, x2: JaxArray, /) -> Tuple[JaxArray, JaxArray]:
+    def setdiff1d(x1, x2):
+        return jnp.setdiff1d(x1, x2)
+    diff1 = setdiff1d(x1, x2)
+    diff2 = setdiff1d(x2, x1)
+    return diff1, diff2
