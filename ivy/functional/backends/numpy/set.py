@@ -94,3 +94,13 @@ def unique_values(x: np.ndarray, /, *, out: Optional[np.ndarray] = None) -> np.n
     else:
         unique = np.unique(x.flatten()).astype(x.dtype)
     return unique
+
+
+def difference(
+        x1: np.ndarray,
+        x2: np.ndarray,
+        /,
+) -> Tuple[np.ndarray, np.ndarray]: 
+        diff1 = np.setdiff1d(x1, x2)
+        diff2 = np.setdiff1d(x2, x1)
+        return diff1, diff2
