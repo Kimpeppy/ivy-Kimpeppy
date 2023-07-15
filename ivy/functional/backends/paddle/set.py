@@ -149,3 +149,8 @@ def unique_values(
         )
         unique = paddle.concat([unique, nans])
     return unique.cast(x_dtype)
+
+def difference(x1: paddle.Tensor, x2: paddle.Tensor, /) -> Tuple[paddle.Tensor, paddle.Tensor]:
+    diff1 = paddle.setdiff1d(x1, x2)
+    diff2 = paddle.setdiff1d(x2, x1)
+    return diff1, diff2
