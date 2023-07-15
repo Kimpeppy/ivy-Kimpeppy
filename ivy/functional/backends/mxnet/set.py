@@ -36,3 +36,13 @@ def unique_values(
     out: Optional[Union[(None, mx.ndarray.NDArray)]] = None,
 ) -> Union[(None, mx.ndarray.NDArray)]:
     raise IvyNotImplementedException()
+
+
+def difference(
+    x1: Union[None, mx.ndarray.NDArray],
+    x2: Union[None, mx.ndarray.NDArray],
+    /,
+) -> Tuple[Union[None, mx.ndarray.NDArray], Union[None, mx.ndarray.NDArray]]:
+    diff1 = mx.nd.setdiff1d(x1, x2)
+    diff2 = mx.nd.setdiff1d(x2, x1)
+    return diff1, diff2
