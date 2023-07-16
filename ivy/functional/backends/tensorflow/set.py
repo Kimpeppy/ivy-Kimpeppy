@@ -116,3 +116,14 @@ def unique_values(
 ) -> Union[tf.Tensor, tf.Variable]:
     ret = tf.unique(tf.reshape(x, [-1]))[0]
     return tf.sort(ret)
+
+@with_unsupported_dtypes({"2.13.0 and below": ("complex",)}, backend_version)
+def difference(
+    x1: Union[tf.Tensor, tf.Variable],
+    x2: Union[tf.Tensor, tf.Variable],
+    /,
+) -> Tuple[Union[tf.Tensor, tf.Variable], Union[tf.Tensor, tf.Variable]]:
+    Results = namedtuple("Results", ["unique_x1", "unique_x2"])
+    unique_x1 = tf.setdiff1d(x1, x2)
+    unique_x2 = tf.setdiff1d(x2, x1)
+    return Results(unique_x1, unique_x2)
