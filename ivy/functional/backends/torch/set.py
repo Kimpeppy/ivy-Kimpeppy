@@ -1,6 +1,6 @@
 # global
 import torch
-from typing import Tuple, Optional
+from typing import Tuple, Optional, Union
 from collections import namedtuple
 
 # local
@@ -122,3 +122,23 @@ def unique_values(
     x: torch.Tensor, /, *, out: Optional[torch.Tensor] = None
 ) -> torch.Tensor:
     return torch.unique(x)
+
+
+@with_unsupported_dtypes(
+    {
+        "2.0.1 and below": ("float16", "complex"),
+    },
+    backend_version,
+)
+def difference(
+    x1: torch.Tensor,
+    x2: torch.Tensor,
+    /
+) -> Tuple[Union[torch.Tensor, torch.Tensor], Union[torch.Tensor, torch.Tensor]]:
+    Results = namedtuple("Results", ["unique_x1", "unique_x2"])
+    set_x1 = set(x1.tolist())
+    set_x2 = set(x2.tolist())
+    unique_x1 = torch.tensor(list(set_x1 - set_x2))
+    unique_x2 = torch.tensor(list(set_x2 - set_x1))
+    return Results(unique_x1, unique_x2)
+    
