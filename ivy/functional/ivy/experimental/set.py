@@ -13,4 +13,5 @@ def difference(
         x2: Union[ivy.Array, ivy.NativeArray],
         /,
         
-)
+) -> Tuple[Union[ivy.Array, ivy.NativeArray], Union[ivy.Array, ivy.NativeArray]]:
+    return ivy.current_backend(x1, x2).difference(x1, x2)
